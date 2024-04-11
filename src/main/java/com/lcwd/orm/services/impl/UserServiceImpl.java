@@ -38,7 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(int userId) {
-
+        User user = userRepository.findById(userId).orElseThrow(()->new RuntimeException("user with given id not found"));
+        userRepository.delete(user);
+        logger.info("user deleted with user id {} ",user.getId());
     }
 
     @Override
