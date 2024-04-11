@@ -25,6 +25,10 @@ public class User {
         this.age = age;
     }
 
+    public User() {
+
+    }
+
     public int getId() {
         return id;
     }
@@ -55,5 +59,15 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", age=" + age +
+                '}';
     }
 }
