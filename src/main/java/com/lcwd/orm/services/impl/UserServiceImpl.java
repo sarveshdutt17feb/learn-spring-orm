@@ -25,7 +25,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user, int userId) {
-        return null;
+//        1: user get database
+//        2:update user
+        User user1 = userRepository.findById(userId).orElseThrow(()->new RuntimeException("user with given id not found"));
+        user1.setName(user.getName());
+        user1.setAge(user.getAge());
+        user1.setCity(user.getCity());
+//      rest of the details also be updated
+        User user2 = userRepository.save(user1);
+        return user2;
     }
 
     @Override

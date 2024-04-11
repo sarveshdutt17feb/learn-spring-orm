@@ -30,10 +30,12 @@ public class LearnSpringOrmApplication implements CommandLineRunner {
 //		List<User> users = userService.getAllUser();
 //		logger.info("user size is: {} ",users.size());
 //		logger.info("Users {} ",users);
-
-		User user = userService.getUser(10);
-		logger.info("user with "+user.getId()+" {} ",user);
+		User user = new User();
+		user.setName("Ayush");
+		user.setAge(30);
+		user.setCity("Bangalore");
+		User updatedUser = userService.updateUser(user,1);
+		logger.info("updated user detail {} ",updatedUser);
 	}
 }
 
-//
