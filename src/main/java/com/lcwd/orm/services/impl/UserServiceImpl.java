@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
@@ -33,11 +35,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUser() {
-        return null;
+        List<User> users = userRepository.findAll();
+        return users;
     }
 
+   
+    //get single user with given id
     @Override
     public User getUser(int userId) {
-        return null;
+        Optional<User> userOptional = userRepository.findById(userId);
+        User user = userOptional.orElseThrow(()->new RuntimeException("user with given id notfound"));
+        return user;
     }
 }
