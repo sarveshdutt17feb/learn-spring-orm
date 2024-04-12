@@ -1,5 +1,6 @@
 package com.lcwd.orm;
 
+import com.lcwd.orm.entities.Address;
 import com.lcwd.orm.entities.Laptop;
 import com.lcwd.orm.entities.Student;
 import com.lcwd.orm.entities.User;
@@ -12,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
@@ -55,13 +57,35 @@ public class LearnSpringOrmApplication implements CommandLineRunner {
 //
 //		Student save = studentRepository.save(student);
 //		logger.info("saved student {} ",save.getStudentName());
+//
+//	Student student = studentRepository.findById(13).get();
+//	logger.info("Name is {} ",student.getStudentName());
+//
+//	Laptop laptop = student.getLaptop();
+//	logger.info("laptop {} {} ",laptop.getBrand(),laptop.getModeNumber());
+//  ONE to MANY
 
-	Student student = studentRepository.findById(13).get();
-	logger.info("Name is {} ",student.getStudentName());
+		Student student = new Student();
+		student.setStudentName("Ravi");
+		student.setStudentId(124);
+		student.setAbout("I am a software engineer");
+		Address a1 = new Address();
+		a1.setAddressId(131);
+		a1.setStreet("235/luc");
+		a1.setCountry("India");
+		a1.setStudent(student);
 
-	Laptop laptop = student.getLaptop();
-	logger.info("laptop {} {} ",laptop.getBrand(),laptop.getModeNumber());
-
+		Address a2 = new Address();
+		a2.setAddressId(132);
+		a2.setStreet("236/NYSE");
+		a2.setCountry("USA");
+		a2.setStudent(student);
+		List<Address> addressList = new ArrayList<>();
+		addressList.add(a1);
+		addressList.add(a2);
+		student.setAddressList(addressList);
+		Student saved = studentRepository.save(student);
+		logger.info("saved student with address {}",saved);
 	}
 }
 
