@@ -14,6 +14,8 @@ public class Product {
     @ManyToMany(mappedBy = "products",fetch = FetchType.EAGER)
     private List<Category> categories = new ArrayList<>();
 
+    boolean active;
+    double price;
 
     public Product() {
     }
